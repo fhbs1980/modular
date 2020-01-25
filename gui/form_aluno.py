@@ -2,8 +2,7 @@ from tkinter import *
 from entidades.aluno import *
 from gui.mensagem import apresentaDialogo
 
-
-def alunos_incluir():
+def alunos_incluir(root):
 	frame = Frame()
 	matriculaLabel = Label(frame, text="Matricula:", underline=0)
 	matriculaEntry = Entry(frame, textvariable="")
@@ -24,6 +23,11 @@ def alunos_incluir():
 		matriculaEntry.delete(0,END)
 		nomeEntry.delete(0,END)
 		matriculaEntry.focus_set()
+		
+	def apertou(event):
+		key = event.keysym
+		if key == 'Return':
+			insere()
 	
 	okButton = Button(frame, text="Inserir", command=insere)
 	matriculaLabel.grid(row=0, column=0, sticky=W, pady=3,padx=3)
@@ -33,3 +37,4 @@ def alunos_incluir():
 	okButton.grid(row=3, column=2, sticky=EW, pady=3, padx=3)
 	frame.grid(row=0, column=0, sticky=NSEW)
 	frame.columnconfigure(1, weight=1)
+	root.bind('<Key>', lambda a : apertou(a))
