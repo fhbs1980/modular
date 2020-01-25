@@ -38,3 +38,40 @@ def alunos_incluir(root):
 	frame.grid(row=0, column=0, sticky=NSEW)
 	frame.columnconfigure(1, weight=1)
 	root.bind('<Key>', lambda a : apertou(a))
+
+def alunos_consultar(root):
+	frame = Frame()
+	matriculaLabel = Label(frame, text="Matricula:", underline=0)
+	matriculaEntry = Entry(frame, textvariable="")
+	matriculaEntry.focus_set()
+	
+	def consulta():
+		
+		matricula = matriculaEntry.get().strip()
+		retorno = consulta_aluno(matricula)
+		if retorno == None:
+			apresentaDialogo('Matrícula não encontrada','Erro')
+			matriculaEntry.delete(0,END)
+			matriculaEntry.focus_set()
+		else:
+			respostaMatriculaLabel = Label(frame, text="Matricula:", underline=0)
+			respostaMatriculaValor = Label(frame, text=retorno['matricula'].title())
+			respostaNomeLabel = Label(frame, text="Nome:", underline=0)
+			respostaNomeValor = Label(frame, text=retorno['nome'].title())
+			respostaMatriculaLabel.grid(row=1, column=0, sticky=W, pady=3,padx=3)
+			respostaMatriculaValor.grid(row=1, column=1, columnspan=3, sticky=EW, pady=3, padx=3)
+			respostaNomeLabel.grid(row=2, column=0, sticky=W, pady=3,padx=3)
+			respostaNomeValor.grid(row=2, column=1, columnspan=3, sticky=EW, pady=3, padx=3)
+	
+	def apertou(event):
+		key = event.keysym
+		if key == 'Return':
+			consulta()
+	
+	consultaButton = Button(frame, text="Consultar", command=consulta)
+	matriculaLabel.grid(row=0, column=0, sticky=W, pady=3,padx=3)
+	matriculaEntry.grid(row=0, column=1, columnspan=3, sticky=EW, pady=3, padx=3)
+	consultaButton.grid(row=3, column=2, sticky=EW, pady=3, padx=3)
+	frame.grid(row=0, column=0, sticky=NSEW)
+	frame.columnconfigure(1, weight=1)
+	root.bind('<Key>', lambda a : apertou(a))

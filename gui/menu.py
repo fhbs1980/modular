@@ -40,7 +40,7 @@ def criaMenu():
 	funcionalidades = {'alunos_incluir':lambda:alunos_incluir(root),
 					   'alunos_alterar':executa2,
 					   'alunos_excluir':executa,
-					   'alunos_consultar':executa,
+					   'alunos_consultar':lambda:alunos_consultar(root),
 					   'alunos_gerar_relacao':executa,
                        'criterios_incluir':executa,
                        'criterios_alterar':executa,
