@@ -29,6 +29,11 @@ class TestAluno(unittest.TestCase):
 		retorno_esperado = insere_aluno('9014513','Flavio')
 		self.assertEqual(retorno_esperado, 1 )
 		
+	def test_031_inserir_aluno_nok_ja_existente(self):
+		print("Caso de Teste 03.1 - Impede a inserção caso seja informado algum campo em branco")
+		retorno_esperado = insere_aluno('','Flavio')
+		self.assertEqual(retorno_esperado, 2 )
+		
 	def test_04_alterar_aluno_ok_condicao_retorno(self):
 		print("Caso de Teste 04 - Condição de Retorno 0 ao alterar com sucesso")
 		insere_aluno('9011122','João')

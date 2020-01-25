@@ -5,6 +5,10 @@ __all__ = ["insere_aluno","altera_aluno", "gera_relacao_alunos","exclui_aluno","
 alunos = []
 
 def insere_aluno(matricula, nome):
+	matricula = matricula.strip()
+	nome = nome.strip()
+	if matricula == '' or nome == '':
+		return 2
 	for aluno in alunos:
 		if aluno['matricula'] == matricula:
 			return 1

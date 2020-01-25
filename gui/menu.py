@@ -1,22 +1,6 @@
 from tkinter import *
 from gui.form_aluno import *
 
-def executa1():
-	frame = Frame()
-	nameLabel = Label(frame, text="Nome:", underline=0)
-	nameEntry = Entry(frame, textvariable="oi")
-	nameEntry.focus_set()
-	okButton = Button(frame, text="Localizar", command=executa2)
-	cancelButton = Button(frame, text="Cancelar", command=root.quit)
-	nameLabel.grid(row=0, column=0, sticky=W, pady=3,padx=3)
-	nameEntry.grid(row=0, column=1, columnspan=3, sticky=EW, pady=3, padx=3)
-	okButton.grid(row=2, column=2, sticky=EW, pady=3, padx=3)
-	cancelButton.grid(row=2, column=3, sticky=EW, pady=3, padx=3)
-	frame.grid(row=0, column=0, sticky=NSEW)
-	frame.columnconfigure(1, weight=1)
-	
-
-   
 def executa2():
    frame = Frame()
    nameLabel = Label(frame, text="Nome2:", underline=0)
@@ -31,20 +15,8 @@ def executa2():
    frame.grid(row=0, column=0, sticky=NSEW)
    frame.columnconfigure(1, weight=1)
    
-def executa3():
-   filewin = Toplevel(root)
-   button = Button(filewin, text="C")
-   button.pack()
-   
-def executa4():
-   filewin = Toplevel(root)
-   button = Button(filewin, text="D")
-   button.pack()
-
-def executa5():
-   filewin = Toplevel(root)
-   button = Button(filewin, text="E")
-   button.pack()
+def executa():
+   pass
 
 def criaMenu():
 	root = Tk()
@@ -67,29 +39,29 @@ def criaMenu():
 
 	funcionalidades = {'alunos_incluir':alunos_incluir,
 					   'alunos_alterar':executa2,
-					   'alunos_excluir':executa3,
-					   'alunos_consultar':executa4,
-					   'alunos_gerar_relacao':executa5,
-                       'criterios_incluir':executa1,
-                       'criterios_alterar':executa2,
-                       'criterios_excluir':executa3,
-                       'criterios_consultar':executa4,
-                       'criterios_gerar_relacao':executa5,
-                       'disciplinas_incluir':executa1,
-                       'disciplinas_alterar':executa2,
-                       'disciplinas_excluir':executa3,
-                       'disciplinas_consultar':executa4,
-                       'disciplinas_gerar_relacao':executa5,
-                       'professores_incluir':executa1,
-                       'professores_alterar':executa2,
-                       'professores_excluir':executa3,
-                       'professores_consultar':executa4,
-                       'professores_gerar_relacao':executa5,
-                       'turmas_incluir':executa1,
-                       'turmas_alterar':executa2,
-                       'turmas_excluir':executa3,
-                       'turmas_consultar':executa4,
-                       'turmas_gerar_relacao':executa5,
+					   'alunos_excluir':executa,
+					   'alunos_consultar':executa,
+					   'alunos_gerar_relacao':executa,
+                       'criterios_incluir':executa,
+                       'criterios_alterar':executa,
+                       'criterios_excluir':executa,
+                       'criterios_consultar':executa,
+                       'criterios_gerar_relacao':executa,
+                       'disciplinas_incluir':executa,
+                       'disciplinas_alterar':executa,
+                       'disciplinas_excluir':executa,
+                       'disciplinas_consultar':executa,
+                       'disciplinas_gerar_relacao':executa,
+                       'professores_incluir':executa,
+                       'professores_alterar':executa,
+                       'professores_excluir':executa,
+                       'professores_consultar':executa,
+                       'professores_gerar_relacao':executa,
+                       'turmas_incluir':executa,
+                       'turmas_alterar':executa,
+                       'turmas_excluir':executa,
+                       'turmas_consultar':executa,
+                       'turmas_gerar_relacao':executa,
                       }
 
 	menubar = Menu(root)
