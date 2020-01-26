@@ -1,6 +1,7 @@
 from tkinter import *
 from entidades.aluno import *
 from gui.mensagem import apresentaDialogo
+from gui.util import *
 
 def alunos_incluir(root):
 	frame = Frame()
@@ -24,10 +25,7 @@ def alunos_incluir(root):
 		nomeEntry.delete(0,END)
 		matriculaEntry.focus_set()
 		
-	def apertou(event):
-		key = event.keysym
-		if key == 'Return':
-			insere()
+	
 	
 	okButton = Button(frame, text="Inserir", command=insere)
 	matriculaLabel.grid(row=0, column=0, sticky=W, pady=3,padx=3)
@@ -37,7 +35,7 @@ def alunos_incluir(root):
 	okButton.grid(row=3, column=2, sticky=EW, pady=3, padx=3)
 	frame.grid(row=0, column=0, sticky=NSEW)
 	frame.columnconfigure(1, weight=1)
-	root.bind('<Key>', lambda a : apertou(a))
+	root.bind('<Key>', lambda a : configura_enter(a, insere))    # parametro de ponteiro para função
 
 def alunos_consultar(root):
 	frame = Frame()
@@ -63,15 +61,10 @@ def alunos_consultar(root):
 			respostaNomeLabel.grid(row=2, column=0, sticky=W, pady=3,padx=3)
 			respostaNomeValor.grid(row=2, column=1, columnspan=3, sticky=EW, pady=3, padx=3)
 	
-	def apertou(event):
-		key = event.keysym
-		if key == 'Return':
-			consulta()
-	
 	consultaButton = Button(frame, text="Consultar", command=consulta)
 	matriculaLabel.grid(row=0, column=0, sticky=W, pady=3,padx=3)
 	matriculaEntry.grid(row=0, column=1, columnspan=3, sticky=EW, pady=3, padx=3)
 	consultaButton.grid(row=3, column=2, sticky=EW, pady=3, padx=3)
 	frame.grid(row=0, column=0, sticky=NSEW)
 	frame.columnconfigure(1, weight=1)
-	root.bind('<Key>', lambda a : apertou(a))
+	root.bind('<Key>', lambda a : configura_enter(a,consulta))
