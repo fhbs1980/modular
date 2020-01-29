@@ -90,3 +90,61 @@ def alunos_consultar(root):
 	frame.grid(row=0, column=0, sticky=NSEW)
 	frame.columnconfigure(1, weight=1)
 	root.bind('<Key>', lambda a : configura_enter(a,consulta))
+	
+def alunos_alterar(root):
+	frame = Frame()
+	matriculaLabel = Label(frame, text="Matricula:", underline=0)
+	matriculaEntry = Entry(frame, textvariable="")
+	matriculaEntry.focus_set()
+	
+	matricula_consultada = StringVar()
+	nome_consultado = StringVar()
+	
+	
+	matriculaLabel.grid(row=0, column=0, sticky=W, pady=3,padx=3)
+	matriculaEntry.grid(row=0, column=1, columnspan=3, sticky=EW, pady=3, padx=3)
+	
+	
+	respostaMatriculaLabel = Label(frame, text="Matricula:", underline=0)
+	respostaMatriculaValor = Label(frame, textvariable=matricula_consultada)
+#	respostaMatriculaLabel.grid(row=1, column=0, sticky=W, pady=3,padx=3)
+#	respostaMatriculaValor.grid(row=1, column=1, columnspan=3, sticky=EW, pady=3, padx=3)
+	
+	respostaNomeLabel = Label(frame, text="Nome:", underline=0)
+	respostaNomeValor = Entry(frame, textvariable=nome_consultado)
+#	respostaNomeLabel.grid(row=2, column=0, sticky=W, pady=3,padx=3)
+#	respostaNomeValor.grid(row=2, column=1, columnspan=3, sticky=EW, pady=3, padx=3)
+	
+	def consulta():
+		
+		matricula = matriculaEntry.get().strip()
+		retorno = consulta_aluno(matricula)
+		if retorno == None:			
+			apresentaDialogo('Matrícula não encontrada','Erro')
+			matriculaEntry.delete(0,END)			
+			matriculaEntry.focus_set()
+			respostaMatriculaLabel.grid_remove()
+			respostaMatriculaValor.grid_remove()
+			respostaNomeLabel.grid_remove()
+			respostaNomeValor.grid_remove()
+			alteraButton.grid_remove()
+		else:
+			matricula_consultada.set(retorno['matricula'])
+			nome_consultado.set(retorno['nome'])
+#			respostaMatriculaLabel = Label(frame, text="Matricula:", underline=0)
+#			respostaMatriculaValor = Label(frame, textvariable=matricula_consultada)
+			respostaMatriculaLabel.grid(row=1, column=0, sticky=W, pady=3,padx=3)
+			respostaMatriculaValor.grid(row=1, column=1, columnspan=3, sticky=EW, pady=3, padx=3)
+#			respostaNomeLabel = Label(frame, text="Nome:", underline=0)
+#			respostaNomeValor = Entry(frame, textvariable=nome_consultado)
+			respostaNomeLabel.grid(row=2, column=0, sticky=W, pady=3,padx=3)
+			respostaNomeValor.grid(row=2, column=1, columnspan=3, sticky=EW, pady=3, padx=3)
+			alteraButton.grid(row=3, column=3, sticky=EW, pady=3, padx=3)
+	
+	consultaButton = Button(frame, text="Consultar", command=consulta)
+	alteraButton = Button(frame, text="Alterar", command=consulta)
+	consultaButton.grid(row=3, column=2, sticky=EW, pady=3, padx=3)
+
+	frame.grid(row=0, column=0, sticky=NSEW)
+	frame.columnconfigure(1, weight=1)
+	root.bind('<Key>', lambda a : configura_enter(a,consulta))

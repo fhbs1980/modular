@@ -38,7 +38,7 @@ def criaMenu():
 	menu_principal = [{'nome':'Cadastros','opcoes': menu_cadastro}]
 
 	funcionalidades = {'alunos_incluir':lambda:alunos_incluir(root),
-					   'alunos_alterar':executa2,
+					   'alunos_alterar':lambda:alunos_alterar(root),
 					   'alunos_excluir':executa,
 					   'alunos_consultar':lambda:alunos_consultar(root),
 					   'alunos_gerar_relacao':executa,
