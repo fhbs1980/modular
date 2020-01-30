@@ -91,6 +91,9 @@ def alunos_consultar(root):
 	frame.columnconfigure(1, weight=1)
 	root.bind('<Key>', lambda a : configura_enter(a,consulta))
 	
+
+	
+	
 def alunos_alterar(root):
 	frame = Frame()
 	matriculaLabel = Label(frame, text="Matricula:", underline=0)
@@ -140,9 +143,25 @@ def alunos_alterar(root):
 			respostaNomeLabel.grid(row=2, column=0, sticky=W, pady=3,padx=3)
 			respostaNomeValor.grid(row=2, column=1, columnspan=3, sticky=EW, pady=3, padx=3)
 			alteraButton.grid(row=3, column=3, sticky=EW, pady=3, padx=3)
+			consultaButton.grid_remove()
+			root.bind('<Key>', lambda a : configura_enter(a,altera))
+			
+	def altera():
+		matricula = matriculaEntry.get().strip()
+		retorno = altera_aluno(matricula,'nome',respostaNomeValor.get().strip())
+		matriculaEntry.delete(0,END)			
+		matriculaEntry.focus_set()
+		respostaMatriculaLabel.grid_remove()
+		respostaMatriculaValor.grid_remove()
+		respostaNomeLabel.grid_remove()
+		respostaNomeValor.grid_remove()
+		alteraButton.grid_remove()
+		consultaButton.grid(row=3, column=2, sticky=EW, pady=3, padx=3)
+		root.bind('<Key>', lambda a : configura_enter(a,consulta))
+		
 	
 	consultaButton = Button(frame, text="Consultar", command=consulta)
-	alteraButton = Button(frame, text="Alterar", command=consulta)
+	alteraButton = Button(frame, text="Alterar", command=altera)
 	consultaButton.grid(row=3, column=2, sticky=EW, pady=3, padx=3)
 
 	frame.grid(row=0, column=0, sticky=NSEW)
