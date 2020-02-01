@@ -2,6 +2,7 @@ import unittest
 from entidades.aluno import *
 from entidades.criterio_aprovacao import *
 from entidades.disciplina import *
+from entidades.professor import *
 
 class TestAluno(unittest.TestCase):
 	
@@ -245,5 +246,79 @@ class TestDisciplina(unittest.TestCase):
 		exclui_disciplina('INF2233')
 		self.assertEqual([], gera_relacao_disciplinas())
 
+class TestProfessor(unittest.TestCase):
+	
+	#funções são testadas em ordem alfabetica e precisam comecar com test_,
+	# por isso test_01 test_02 ...
+	
+	def test_01_inserir_professor_ok_condicao_retorno(self):
+		print("\n\n--------------------------------------------------------")
+		print("Casos de teste - Módulo Professor")
+		print("--------------------------------------------------------")
+		print("Caso de Teste 01 - Condicao de Retorno 0 ao inserir com sucesso")
+		retorno_esperado = insere_professor('9014513','Flavio')
+		self.assertEqual(retorno_esperado, 0)
+		
+	def test_02_inserir_professor_ok_inserido_com_sucesso(self):
+		print("Caso de Teste 02 - Verifica se inseriu efetivamente")
+		self.assertIn({'matricula':'9014513','nome':'Flavio'},gera_relacao_professores())
+
+	def test_03_inserir_professor_nok_ja_existente(self):
+		print("Caso de Teste 03 - Impede a inserção caso já exista a matricula inserida")
+		retorno_esperado = insere_professor('9014513','Flavio')
+		self.assertEqual(retorno_esperado, 1 )
+		
+	def test_031_inserir_professor_nok_ja_existente(self):
+		print("Caso de Teste 03.1 - Impede a inserção caso seja informado algum campo em branco")
+		retorno_esperado = insere_professor('','Flavio')
+		self.assertEqual(retorno_esperado, 2 )
+		
+	def test_04_alterar_professor_ok_condicao_retorno(self):
+		print("Caso de Teste 04 - Condição de Retorno 0 ao alterar com sucesso")
+		insere_professor('9011122','João')
+		insere_professor('9012233','Ana')
+		retorno_esperado = altera_professor('9011122','nome','Matheus')
+		self.assertEqual(retorno_esperado, 0)
+		
+	def test_05_alterar_professor_ok_alterado_com_sucesso(self):
+		print("Caso de Teste 05 - Condição de Retorno 0 ao alterar com sucesso")
+		self.assertIn({'matricula':'9011122','nome':'Matheus'},gera_relacao_professores())
+		
+	def test_06_alterar_professor_nok_nao_existente(self):
+		print("Caso de Teste 06 - Verifica se retorna erro ao alterar não existente")
+		retorno_esperado = altera_professor('9010000','nome','Matheus')
+		self.assertEqual(retorno_esperado, 1)
+		
+	def test_07_excluir_professor_ok_condicao_retorno(self):
+		print("Caso de Teste 07 - Condição de Retorno 0 ao excluir com sucesso")
+		retorno_esperado = exclui_professor('9012233')
+		self.assertEqual(retorno_esperado, 0)
+		
+	def test_08_excluir_professor_ok_excluido_com_sucesso(self):
+		print("Caso de Teste 08 - Condição de Retorno 0 ao excluir com sucesso")
+		self.assertNotIn({'matricula':'9012233','nome':'Ana'},gera_relacao_professores())
+		
+	def test_09_excluir_professor_nok_nao_existente(self):
+		print("Caso de Teste 09 - Verifica se retorna erro ao excluir não existente")
+		retorno_esperado = exclui_professor('9010000')
+		self.assertEqual(retorno_esperado, 1)
+		
+	def test_10_consultar_professor_ok(self):
+		print("Caso de Teste 10 - Consulta de professor existente")
+		self.assertEqual({'matricula':'9011122','nome':'Matheus'}, consulta_professor('9011122'))
+		
+	def test_11_consultar_professor_nok_nao_existente(self):
+		print("Caso de Teste 11 - Consulta de professor não existente")
+		self.assertEqual(None, consulta_professor('9011000'))
+		
+	def test_12_gerar_relacao_professores(self):
+		print("Caso de Teste 12 - Gerar relacao de alunos")
+		self.assertEqual([{'matricula':'9014513', 'nome':'Flavio'}, {'matricula':'9011122', 'nome':'Matheus'}], gera_relacao_professores())
+		
+	def test_13_gerar_relacao_professores_vazia(self):
+		print("Caso de Teste 13 - Gerar relacao vazia (todos os alunos deletados)")
+		exclui_professor('9014513')
+		exclui_professor('9011122')
+		self.assertEqual([], gera_relacao_professores())
 		
 unittest.main()

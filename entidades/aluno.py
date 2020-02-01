@@ -14,7 +14,6 @@ def insere_aluno(matricula, nome):
 			return 1
 	novo_aluno = {'matricula': matricula, 'nome': nome}
 	alunos.append(novo_aluno)
-	print(alunos)
 	return 0
 	
 def altera_aluno(matricula, campo, valor):

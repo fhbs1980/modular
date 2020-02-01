@@ -5,6 +5,10 @@ __all__ = ["insere_professor","altera_professor", "gera_relacao_professores","ex
 professores = []
 
 def insere_professor(matricula, nome):
+	matricula = matricula.strip()
+	nome = nome.strip()
+	if matricula == '' or nome == '':
+		return 2
 	for professor in professores:
 		if professor['matricula'] == matricula:
 			return 1
