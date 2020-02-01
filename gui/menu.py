@@ -1,5 +1,6 @@
 from tkinter import *
 from gui.form_aluno import *
+from gui.form_criterio import *
 
 def executa2():
    frame = Frame()
@@ -42,11 +43,11 @@ def criaMenu():
 					   'alunos_excluir':lambda:alunos_excluir(root),
 					   'alunos_consultar':lambda:alunos_consultar(root),
 					   'alunos_gerar_relacao':lambda:alunos_gerar_relacao(root),
-                       'criterios_incluir':executa,
-                       'criterios_alterar':executa,
-                       'criterios_excluir':executa,
-                       'criterios_consultar':executa,
-                       'criterios_gerar_relacao':executa,
+                       'criterios_incluir':lambda:criterios_incluir(root),
+                       'criterios_alterar':lambda:criterios_alterar(root),
+                       'criterios_excluir':lambda:criterios_excluir(root),
+                       'criterios_consultar':lambda:criterios_consultar(root),
+                       'criterios_gerar_relacao':lambda:criterios_gerar_relacao(root),
                        'disciplinas_incluir':executa,
                        'disciplinas_alterar':executa,
                        'disciplinas_excluir':executa,
