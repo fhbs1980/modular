@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 from entidades.aluno import *
 from gui.mensagem import apresentaDialogo
 from gui.util import *
@@ -197,3 +198,29 @@ def alunos_excluir(root):
 	frame.grid(row=0, column=0, sticky=NSEW)
 	frame.columnconfigure(1, weight=1)
 	root.bind('<Key>', lambda a : configura_enter(a,consulta))	
+
+def alunos_gerar_relacao(root):
+	frame = Frame()
+	
+	relacaoAlunos = gera_relacao_alunos()
+
+	tree = ttk.Treeview(frame, columns = (1,2), height = 5, show = "headings")
+	tree.pack(side = 'left')
+
+	tree.heading(1, text="Matrícula")
+	tree.heading(2, text="Nome")
+
+	tree.column(1, width = 100)
+	tree.column(2, width = 100)
+
+	scroll = ttk.Scrollbar(frame, orient="vertical", command=tree.yview)
+	scroll.pack(side = 'right', fill = 'y')
+
+	tree.configure(yscrollcommand=scroll.set)
+
+	for aluno in relacaoAlunos:
+		tree.insert('', 'end', values = (aluno['matricula'], aluno['nome']) )
+
+	frame.grid(row=0, column=0, sticky=NSEW)
+	frame.columnconfigure(1, weight=1)
+	root.bind('<Key>', lambda a : gera_relacao_alunos())	

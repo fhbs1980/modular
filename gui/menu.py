@@ -41,7 +41,7 @@ def criaMenu():
 					   'alunos_alterar':lambda:alunos_alterar(root),
 					   'alunos_excluir':lambda:alunos_excluir(root),
 					   'alunos_consultar':lambda:alunos_consultar(root),
-					   'alunos_gerar_relacao':executa,
+					   'alunos_gerar_relacao':lambda:alunos_gerar_relacao(root),
                        'criterios_incluir':executa,
                        'criterios_alterar':executa,
                        'criterios_excluir':executa,
