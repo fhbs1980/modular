@@ -223,4 +223,14 @@ def alunos_gerar_relacao(root):
 
 	frame.grid(row=0, column=0, sticky=NSEW)
 	frame.columnconfigure(1, weight=1)
-	root.bind('<Key>', lambda a : gera_relacao_alunos())	
+	root.bind('<Key>', lambda a : gera_relacao_alunos())
+	
+	def OnDoubleClick(event):
+		print("selected items:")
+		for item in tree.selection():
+			valor = tree.item(item)['values']
+			item_matricula = str(valor[0])
+			item_nome = valor[1]
+			print(item_matricula + " - " + item_nome)
+
+	tree.bind("<<TreeviewSelect>>", OnDoubleClick)	

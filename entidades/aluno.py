@@ -2,7 +2,7 @@
 # Encapsulamento dos atributos e disponibilização apenas das funções de acesso
 __all__ = ["insere_aluno","altera_aluno", "gera_relacao_alunos","exclui_aluno","consulta_aluno"]
 
-alunos = []
+alunos = [{"matricula":"9014512","nome":"Flavio"}]
 
 def insere_aluno(matricula, nome):
 	matricula = matricula.strip()
