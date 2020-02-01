@@ -9,7 +9,7 @@ def insere_professor(matricula, nome):
 		if professor['matricula'] == matricula:
 			return 1
 	novo_professor = {'matricula': matricula, 'nome': nome}
-	professor.append(novo_professor)
+	professores.append(novo_professor)
 	return 0
 	
 def altera_professor(matricula, campo, valor):
@@ -22,7 +22,7 @@ def altera_professor(matricula, campo, valor):
 def exclui_professor(matricula):
 	for professor in professores:
 		if professor['matricula'] == matricula:
-			professores.remove(aluno)
+			professores.remove(professor)
 			return 0
 	return 1
 
