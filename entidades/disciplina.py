@@ -16,6 +16,7 @@ def insere_disciplina(codigo, nome, ementa, criterio_aprovacao=''):
 			return 1
 	nova_disciplina = {'codigo': codigo, 'nome': nome, 'ementa': ementa, 'criterio_aprovacao': criterio_aprovacao}
 	disciplinas.append(nova_disciplina)
+	print(disciplinas)
 	return 0
 
 def altera_disciplina(codigo, campo, valor):

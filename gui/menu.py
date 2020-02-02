@@ -3,6 +3,7 @@ from gui.form_aluno import *
 from gui.form_criterio import *
 from gui.form_professor import *
 from gui.form_turma import *
+from gui.form_disciplina import *
 
 def executa2():
    frame = Frame()
@@ -23,7 +24,7 @@ def executa():
 
 def criaMenu():
 	root = Tk()
-	root.geometry("300x200+200+100")
+	root.geometry("600x400+200+100")
 	root.title("Aplicação Matrícula")
 
 	menu_aluno = [{'nome':'Incluir','id':'incluir'},{'nome':'Alterar','id':'alterar'},{'nome':'Excluir','id':'excluir'},{'nome':'Consultar','id':'consultar'},{'nome':'Gerar Relação','id':'gerar_relacao'}]
@@ -50,11 +51,11 @@ def criaMenu():
                        'criterios_excluir':lambda:criterios_excluir(root),
                        'criterios_consultar':lambda:criterios_consultar(root),
                        'criterios_gerar_relacao':lambda:criterios_gerar_relacao(root),
-                       'disciplinas_incluir':executa,
+                       'disciplinas_incluir':lambda:disciplinas_incluir(root),
                        'disciplinas_alterar':executa,
                        'disciplinas_excluir':executa,
                        'disciplinas_consultar':executa,
-                       'disciplinas_gerar_relacao':executa,
+                       'disciplinas_gerar_relacao':lambda:disciplinas_gerar_relacao(root),
                        'professores_incluir':lambda:professores_incluir(root),
                        'professores_alterar':lambda:professores_alterar(root),
                        'professores_excluir':lambda:professores_excluir(root),
