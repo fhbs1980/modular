@@ -5,6 +5,12 @@ __all__ = ["insere_disciplina","altera_disciplina", "gera_relacao_disciplinas","
 disciplinas = []
 
 def insere_disciplina(codigo, nome, ementa, criterio_aprovacao=''):
+	codigo = codigo.strip()
+	nome = nome.strip()
+	ementa = ementa.strip()
+	criterio_aprovacao = criterio_aprovacao.strip()
+	if codigo == '' or nome == '':
+		return 2
 	for disciplina in disciplinas:
 		if disciplina['codigo'] == codigo:
 			return 1

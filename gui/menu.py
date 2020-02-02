@@ -2,6 +2,7 @@ from tkinter import *
 from gui.form_aluno import *
 from gui.form_criterio import *
 from gui.form_professor import *
+from gui.form_turma import *
 
 def executa2():
    frame = Frame()
@@ -29,7 +30,7 @@ def criaMenu():
 	menu_criterio = [{'nome':'Incluir','id':'incluir'},{'nome':'Alterar','id':'alterar'},{'nome':'Excluir','id':'excluir'},{'nome':'Consultar','id':'consultar'},{'nome':'Gerar Relação','id':'gerar_relacao'}]
 	menu_disciplina = [{'nome':'Incluir','id':'incluir'},{'nome':'Alterar','id':'alterar'},{'nome':'Excluir','id':'excluir'},{'nome':'Consultar','id':'consultar'},{'nome':'Gerar Relação','id':'gerar_relacao'}]
 	menu_professor = [{'nome':'Incluir','id':'incluir'},{'nome':'Alterar','id':'alterar'},{'nome':'Excluir','id':'excluir'},{'nome':'Consultar','id':'consultar'},{'nome':'Gerar Relação','id':'gerar_relacao'}]
-	menu_turma = [{'nome':'Incluir','id':'incluir'},{'nome':'Alterar','id':'alterar'},{'nome':'Excluir','id':'excluir'},{'nome':'Consultar','id':'consultar'},{'nome':'Gerar Relação','id':'gerar_relacao'}]
+	menu_turma = [{'nome':'Incluir','id':'incluir'},{'nome':'Excluir','id':'excluir'},{'nome':'Consultar','id':'consultar'},{'nome':'Gerar Relação','id':'gerar_relacao'}]
 
 	menu_cadastro = [{'nome':'Alunos','id':'alunos','opcoes': menu_aluno}, 
 					{'nome':'Critérios de Aprovação','id':'criterios','opcoes': menu_criterio}, 
@@ -59,11 +60,10 @@ def criaMenu():
                        'professores_excluir':lambda:professores_excluir(root),
                        'professores_consultar':lambda:professores_consultar(root),
                        'professores_gerar_relacao':lambda:professores_gerar_relacao(root),
-                       'turmas_incluir':executa,
-                       'turmas_alterar':executa,
-                       'turmas_excluir':executa,
-                       'turmas_consultar':executa,
-                       'turmas_gerar_relacao':executa,
+                       'turmas_incluir':lambda:turmas_incluir(root),
+                       'turmas_excluir':lambda:turmas_excluir(root),
+                       'turmas_consultar':lambda:turmas_consultar(root),
+                       'turmas_gerar_relacao':lambda:turmas_gerar_relacao(root)
                       }
 
 	menubar = Menu(root)

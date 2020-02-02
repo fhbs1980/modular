@@ -49,7 +49,7 @@ def professores_consultar(root):
 	
 	def consulta():
 		matricula = matriculaEntry.get().strip()
-		retorno = consulta_professor(matricula)
+		retorno = consulta_professor (matricula)
 		if retorno == None:			
 			apresentaDialogo('Matrícula não encontrada','Erro')
 			matriculaEntry.delete(0,END)			

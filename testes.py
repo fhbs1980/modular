@@ -3,6 +3,7 @@ from entidades.aluno import *
 from entidades.criterio_aprovacao import *
 from entidades.disciplina import *
 from entidades.professor import *
+from entidades.turma import *
 
 class TestAluno(unittest.TestCase):
 	
@@ -105,6 +106,11 @@ class TestCriterio(unittest.TestCase):
 		retorno_esperado = insere_criterio('1','G1+3G2/4')
 		self.assertEqual(retorno_esperado, 1 )
 		
+	def test_031_inserir_criterio_nok_ja_existente(self):
+		print("Caso de Teste 03.1 - Impede a inserção caso seja informado algum campo em branco")
+		retorno_esperado = insere_criterio('','')
+		self.assertEqual(retorno_esperado, 2 )
+		
 	def test_04_alterar_criterio_ok_condicao_retorno(self):
 		print("Caso de Teste 04 - Condição de Retorno 0 ao alterar com sucesso")
 		insere_criterio('2','G1+3G2/4')
@@ -175,6 +181,11 @@ class TestDisciplina(unittest.TestCase):
 	def test_03_inserir_disciplina_ok_inserido_com_sucesso_sem_criterio(self):
 		print("Caso de Teste 03 - Verifica se inseriu efetivamente sem criterio")
 		self.assertIn({'codigo':'INF1301','nome':'Programação Modular','ementa':'Exemplo de Ementa','criterio_aprovacao':''},gera_relacao_disciplinas())
+
+	def test_031_inserir_disciplina_nok_ja_existente(self):
+		print("Caso de Teste 03.1 - Impede a inserção caso seja informado algum campo em branco")
+		retorno_esperado = insere_disciplina('','','','')
+		self.assertEqual(retorno_esperado, 2 )
 
 	def test_04_inserir_disciplina_ok_inserido_com_sucesso_sem_criterio(self):
 		print("Caso de Teste 04 - Verifica se inseriu efetivamente com criterio")
@@ -320,5 +331,80 @@ class TestProfessor(unittest.TestCase):
 		exclui_professor('9014513')
 		exclui_professor('9011122')
 		self.assertEqual([], gera_relacao_professores())
+	
+class TestTurma(unittest.TestCase):
+	
+	#funções são testadas em ordem alfabetica e precisam comecar com test_,
+	# por isso test_1 test_2 ...
+	
+	def test_01_inserir_turma_ok_condicao_retorno(self):
+		print("\n\n--------------------------------------------------------")
+		print("Casos de teste - Módulo Critério de Aprovação")
+		print("--------------------------------------------------------")
+		print("Caso de Teste 01 - Condicao de Retorno 0 ao inserir com sucesso")
+		retorno_esperado = insere_turma('3WA')
+		self.assertEqual(retorno_esperado, 0)
 		
+	def test_02_inserir_turma_ok_inserido_com_sucesso(self):
+		print("Caso de Teste 02 - Verifica se inseriu efetivamente")
+		self.assertIn({'codigo':'3WA'},gera_relacao_turmas())
+
+	def test_03_inserir_turma_nok_ja_existente(self):
+		print("Caso de Teste 03 - Impede a inserção caso já exista a turma inserido")
+		retorno_esperado = insere_turma('3WA')
+		self.assertEqual(retorno_esperado, 1 )
+		
+	def test_031_inserir_turma_nok_ja_existente(self):
+		print("Caso de Teste 03.1 - Impede a inserção caso seja informado algum campo em branco")
+		retorno_esperado = insere_turma('')
+		self.assertEqual(retorno_esperado, 2 )
+		
+	def test_04_alterar_turma_ok_condicao_retorno(self):
+		print("Caso de Teste 04 - Condição de Retorno 0 ao alterar com sucesso")
+		insere_turma('3WB')
+		insere_turma('3WC')
+		retorno_esperado = altera_turma('3WB','codigo','3WD')
+		self.assertEqual(retorno_esperado, 0)
+		
+	def test_05_alterar_turma_ok_alterado_com_sucesso(self):
+		print("Caso de Teste 05 - Condição de Retorno 0 ao alterar com sucesso")
+		self.assertIn({'codigo':'3WD'},gera_relacao_turmas())
+		
+	def test_06_alterar_turma_nok_nao_existente(self):
+		print("Caso de Teste 06 - Verifica se retorna erro ao alterar não existente")
+		retorno_esperado = altera_turma('3WE','codigo','3WF')
+		self.assertEqual(retorno_esperado, 1)
+		
+	def test_07_excluir_turma_ok_condicao_retorno(self):
+		print("Caso de Teste 07 - Condição de Retorno 0 ao excluir com sucesso")
+		retorno_esperado = exclui_turma('3WA')
+		self.assertEqual(retorno_esperado, 0)
+		
+	def test_08_excluir_turma_ok_excluido_com_sucesso(self):
+		print("Caso de Teste 08 - Condição de Retorno 0 ao excluir com sucesso")
+		self.assertNotIn({'codigo':'3WA'},gera_relacao_turmas())
+		
+	def test_09_excluir_turma_nok_nao_existente(self):
+		print("Caso de Teste 09 - Verifica se retorna erro ao excluir não existente")
+		retorno_esperado = exclui_turma('3WF')
+		self.assertEqual(retorno_esperado, 1)
+		
+	def test_10_consultar_turma_ok(self):
+		print("Caso de Teste 10 - Consulta de turma existente")
+		self.assertEqual({'codigo':'3WD'}, consulta_turma('3WD'))
+		
+	def test_11_consultar_turma_nok_nao_existente(self):
+		print("Caso de Teste 11 - Consulta de turma não existente")
+		self.assertEqual(None, consulta_turma('3WG'))
+		
+	def test_12_gerar_relacao_turmas(self):
+		print("Caso de Teste 12 - Gerar relacao de turmas")
+		self.assertEqual([{'codigo':'3WD'}, {'codigo':'3WC'}], gera_relacao_turmas())
+		
+	def test_13_gerar_relacao_turmas_vazia(self):
+		print("Caso de Teste 13 - Gerar relacao vazia (todas as turmas deletadas)")
+		exclui_turma('3WD')
+		exclui_turma('3WC')
+		self.assertEqual([], gera_relacao_turmas())	
+	
 unittest.main()

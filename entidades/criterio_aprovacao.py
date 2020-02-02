@@ -5,6 +5,10 @@ __all__ = ["insere_criterio","altera_criterio", "gera_relacao_criterios","exclui
 criterios = []
 
 def insere_criterio(codigo, formula):
+	codigo = codigo.strip()
+	formula = formula.strip()
+	if codigo == '' or formula == '':
+		return 2
 	for criterio in criterios:
 		if criterio['codigo'] == codigo:
 			return 1

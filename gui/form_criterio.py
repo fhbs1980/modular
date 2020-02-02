@@ -74,7 +74,7 @@ def criterios_consultar(root):
 	
 def criterios_alterar(root):
 	frame = Frame()
-	codigoLabel = Label(frame, text="Matricula:", underline=0)
+	codigoLabel = Label(frame, text="Código:", underline=0)
 	codigoEntry = Entry(frame, textvariable="")
 	codigoEntry.focus_set()
 	codigo_consultado = StringVar()

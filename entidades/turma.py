@@ -1,10 +1,13 @@
 
 # Encapsulamento dos atributos e disponibilização apenas das funções de acesso
-__all__ = ["insere_turma","gera_relacao_turmas","exclui_turma","consulta_turma"]
+__all__ = ["insere_turma","altera_turma","gera_relacao_turmas","exclui_turma","consulta_turma"]
 
 turmas = []
 
 def insere_turma(codigo):
+	codigo = codigo.strip()
+	if codigo == '':
+		return 2
 	for turma in turmas:
 		if turma['codigo'] == codigo:
 			return 1
