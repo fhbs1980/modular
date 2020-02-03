@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from entidades.criterio_aprovacao import *
 from entidades.disciplina import *
+from entidades.criterio_aprovacao import *
 from gui.mensagem import apresentaDialogo
 from gui.util import *
 
@@ -69,41 +70,63 @@ def disciplinas_incluir(root):
 	frame.columnconfigure(1, weight=1)
 #	root.bind('<Key>', lambda a : configura_enter(a, insere))    # parametro de ponteiro para função
 
-def criterios_consultar(root):
+def disciplinas_consultar(root):
 	frame = Frame()
 	codigoLabel = Label(frame, text="Código:", underline=0)
 	codigoEntry = Entry(frame, textvariable="")
 	codigoEntry.focus_set()
 	codigo_consultado = StringVar()
-	formula_consultada = StringVar()
+	nome_consultado = StringVar()
+	ementa_consultada = StringVar()
+	criterio_consultado = StringVar()
 	codigoLabel.grid(row=0, column=0, sticky=W, pady=3,padx=3)
 	codigoEntry.grid(row=0, column=1, columnspan=3, sticky=EW, pady=3, padx=3)
 	respostaCodigoLabel = Label(frame, text="Código:", underline=0)
 	respostaCodigoValor = Label(frame, textvariable=codigo_consultado)
-	respostaFormulaLabel = Label(frame, text="Fórmula:", underline=0)
-	respostaFormulaValor = Label(frame, textvariable=formula_consultada)
+	respostaNomeLabel = Label(frame, text="Nome:", underline=0)
+	respostaNomeValor = Label(frame, textvariable=nome_consultado)
+	respostaEmentaLabel = Label(frame, text="Ementa:", underline=0)
+	respostaEmentaValor = Text(frame, height=10, width=5)
+	respostaCriterioLabel = Label(frame, text="Critério:", underline=0)
+	respostaCriterioValor = Label(frame, textvariable=criterio_consultado)
 	
 	def consulta():
 		codigo = codigoEntry.get().strip()
-		retorno = consulta_criterio(codigo)
+		retorno = consulta_disciplina(codigo)
 		if retorno == None:			
-			apresentaDialogo('Critério com código não encontrada','Erro')
+			apresentaDialogo('Disciplina não encontrada','Erro')
 			codigoEntry.delete(0,END)			
 			codigoEntry.focus_set()
 			respostaCodigoLabel.grid_remove()
 			respostaCodigoValor.grid_remove()
-			respostaFormulaLabel.grid_remove()
-			respostaFormulaValor.grid_remove()
+			respostaNomeLabel.grid_remove()
+			respostaNomeValor.grid_remove()
+			respostaEmentaLabel.grid_remove()
+			respostaEmentaValor.grid_remove()
 		else:
 			codigo_consultado.set(retorno['codigo'])
-			formula_consultada.set(retorno['formula'])
+			nome_consultado.set(retorno['nome'])
+			ementa_consultada.set(retorno['ementa'])
+			
+			criterio_consultado.set(retorno['criterio_aprovacao'])
+			
+			criterio_pesquisado = consulta_criterio(criterio_consultado.get())
+			
+			if criterio_pesquisado == None:
+				criterio_consultado.set("Criterio ainda não escolhido")
+			else:
+				criterio_consultado.set("Critério " + criterio_pesquisado['codigo'] + ": " + criterio_pesquisado['formula'])
+			
+			respostaEmentaValor.insert("1.0", ementa_consultada.get())
 			respostaCodigoLabel.grid(row=1, column=0, sticky=W, pady=3,padx=3)
 			respostaCodigoValor.grid(row=1, column=1, columnspan=3, sticky=EW, pady=3, padx=3)
-			respostaFormulaLabel.grid(row=2, column=0, sticky=W, pady=3,padx=3)
-			respostaFormulaValor.grid(row=2, column=1, columnspan=3, sticky=EW, pady=3, padx=3)		
+			respostaNomeLabel.grid(row=2, column=0, sticky=W, pady=3,padx=3)
+			respostaNomeValor.grid(row=2, column=1, columnspan=3, sticky=EW, pady=3, padx=3)	
+			respostaEmentaLabel.grid(row=3, column=0, sticky=W, pady=3,padx=3)
+			respostaEmentaValor.grid(row=3, column=1, columnspan=3, sticky=EW, pady=3, padx=3)
 			
 	consultaButton = Button(frame, text="Consultar", command=consulta)
-	consultaButton.grid(row=3, column=2, sticky=EW, pady=3, padx=3)
+	consultaButton.grid(row=4, column=2, sticky=EW, pady=3, padx=3)
 	frame.grid(row=0, column=0, sticky=NSEW)
 	frame.columnconfigure(1, weight=1)
 	root.bind('<Key>', lambda a : configura_enter(a,consulta))	

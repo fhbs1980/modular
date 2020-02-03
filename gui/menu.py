@@ -54,7 +54,7 @@ def criaMenu():
                        'disciplinas_incluir':lambda:disciplinas_incluir(root),
                        'disciplinas_alterar':executa,
                        'disciplinas_excluir':executa,
-                       'disciplinas_consultar':executa,
+                       'disciplinas_consultar':lambda:disciplinas_consultar(root),
                        'disciplinas_gerar_relacao':lambda:disciplinas_gerar_relacao(root),
                        'professores_incluir':lambda:professores_incluir(root),
                        'professores_alterar':lambda:professores_alterar(root),
