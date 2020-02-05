@@ -31,7 +31,7 @@ class TestAluno(unittest.TestCase):
 		retorno_esperado = insere_aluno('9014513','Flavio')
 		self.assertEqual(retorno_esperado, 1 )
 		
-	def test_04_inserir_aluno_nok_ja_existente(self):
+	def test_04_inserir_aluno_nok_campo_em_branco(self):
 		print("Caso de Teste 04 - Impede a inserção caso seja informado algum campo em branco")
 		retorno_esperado = insere_aluno('','Flavio')
 		self.assertEqual(retorno_esperado, 2 )
@@ -44,7 +44,7 @@ class TestAluno(unittest.TestCase):
 		self.assertEqual(retorno_esperado, 0)
 		
 	def test_06_alterar_aluno_ok_alterado_com_sucesso(self):
-		print("Caso de Teste 06 - Condição de Retorno 0 ao alterar com sucesso")
+		print("Caso de Teste 06 - Verifica se alterou efetivamente")
 		self.assertIn({'matricula':'9011122','nome':'Matheus'},gera_relacao_alunos())
 		
 	def test_07_alterar_aluno_nok_nao_existente(self):
@@ -58,7 +58,7 @@ class TestAluno(unittest.TestCase):
 		self.assertEqual(retorno_esperado, 0)
 		
 	def test_09_excluir_aluno_ok_excluido_com_sucesso(self):
-		print("Caso de Teste 09 - Condição de Retorno 0 ao excluir com sucesso")
+		print("Caso de Teste 09 - Verifica se excluiu efetivamente")
 		self.assertNotIn({'matricula':'9012233','nome':'Ana'},gera_relacao_alunos())
 		
 	def test_10_excluir_aluno_nok_nao_existente(self):
@@ -106,7 +106,7 @@ class TestCriterio(unittest.TestCase):
 		retorno_esperado = insere_criterio('1','G1+3G2/4')
 		self.assertEqual(retorno_esperado, 1 )
 		
-	def test_04_inserir_criterio_nok_ja_existente(self):
+	def test_04_inserir_criterio_nok_campo_em_branco(self):
 		print("Caso de Teste 04 - Impede a inserção caso seja informado algum campo em branco")
 		retorno_esperado = insere_criterio('','')
 		self.assertEqual(retorno_esperado, 2 )
@@ -119,7 +119,7 @@ class TestCriterio(unittest.TestCase):
 		self.assertEqual(retorno_esperado, 0)
 		
 	def test_06_alterar_criterio_ok_alterado_com_sucesso(self):
-		print("Caso de Teste 06 - Condição de Retorno 0 ao alterar com sucesso")
+		print("Caso de Teste 06 - Verifica se alterou efetivamente")
 		self.assertIn({'codigo':'2','formula':'2G1+3G2/5'},gera_relacao_criterios())
 		
 	def test_07_alterar_criterio_nok_nao_existente(self):
@@ -133,7 +133,7 @@ class TestCriterio(unittest.TestCase):
 		self.assertEqual(retorno_esperado, 0)
 		
 	def test_09_excluir_criterio_ok_excluido_com_sucesso(self):
-		print("Caso de Teste 09 - Condição de Retorno 0 ao excluir com sucesso")
+		print("Caso de Teste 09 - Verifica se excluiu efetivamente")
 		self.assertNotIn({'codigo':'1','formula':'G1+G2/2'},gera_relacao_criterios())
 		
 	def test_10_excluir_criterio_nok_nao_existente(self):
@@ -182,7 +182,7 @@ class TestDisciplina(unittest.TestCase):
 		print("Caso de Teste 03 - Verifica se inseriu efetivamente sem criterio")
 		self.assertIn({'codigo':'INF1301','nome':'Programação Modular','ementa':'Exemplo de Ementa','criterio_aprovacao':''},gera_relacao_disciplinas())
 
-	def test_04_inserir_disciplina_nok_ja_existente(self):
+	def test_04_inserir_disciplina_nok_campo_em_branco(self):
 		print("Caso de Teste 04 - Impede a inserção caso seja informado algum campo em branco")
 		retorno_esperado = insere_disciplina('','','','')
 		self.assertEqual(retorno_esperado, 2 )
@@ -207,7 +207,7 @@ class TestDisciplina(unittest.TestCase):
 		self.assertEqual(retorno_esperado, 0)
 		
 	def test_08_alterar_disciplina_ok_alterado_com_sucesso(self):
-		print("Caso de Teste 08 - Condição de Retorno 0 ao alterar com sucesso")
+		print("Caso de Teste 08 - Verifica se alterou nome efetivamente")
 		self.assertIn({'codigo':'INF1122','nome':'Técnicas de Programação III','ementa':'Exemplo de Ementa','criterio_aprovacao':''},gera_relacao_disciplinas())
 		
 	def test_09_alterar_disciplina_ementa_ok_condicao_retorno(self):
@@ -216,7 +216,7 @@ class TestDisciplina(unittest.TestCase):
 		self.assertEqual(retorno_esperado, 0)
 		
 	def test_10_alterar_disciplina_ok_alterado_com_sucesso(self):
-		print("Caso de Teste 10 - Condição de Retorno 0 ao alterar com sucesso")
+		print("Caso de Teste 10 - Verifica se alterou ementa efetivamente")
 		self.assertIn({'codigo':'INF2233','nome':'Trabalho Final','ementa':'Ementa alterada','criterio_aprovacao':''},gera_relacao_disciplinas())
 	
 	def test_11_alterar_disciplina_nok_nao_existente(self):
@@ -230,7 +230,7 @@ class TestDisciplina(unittest.TestCase):
 		self.assertEqual(retorno_esperado, 0)
 		
 	def test_13_excluir_disciplina_ok_excluido_com_sucesso(self):
-		print("Caso de Teste 13 - Condição de Retorno 0 ao excluir com sucesso")
+		print("Caso de Teste 13 - Verifica se excluiu efetivamente")
 		self.assertNotIn({'codigo':'INF1082','nome':'Linguagens e Técnicas de Programação II','ementa':'Exemplo de Ementa','criterio_aprovacao':'1'},gera_relacao_disciplinas())
 		
 	def test_14_excluir_disciplina_nok_nao_existente(self):
@@ -279,7 +279,7 @@ class TestProfessor(unittest.TestCase):
 		retorno_esperado = insere_professor('9014513','Flavio')
 		self.assertEqual(retorno_esperado, 1 )
 		
-	def test_04_inserir_professor_nok_ja_existente(self):
+	def test_04_inserir_professor_nok_campo_em_branco(self):
 		print("Caso de Teste 04 - Impede a inserção caso seja informado algum campo em branco")
 		retorno_esperado = insere_professor('','Flavio')
 		self.assertEqual(retorno_esperado, 2 )
@@ -292,7 +292,7 @@ class TestProfessor(unittest.TestCase):
 		self.assertEqual(retorno_esperado, 0)
 		
 	def test_06_alterar_professor_ok_alterado_com_sucesso(self):
-		print("Caso de Teste 06 - Condição de Retorno 0 ao alterar com sucesso")
+		print("Caso de Teste 06 - Verifica se alterou efetivamente")
 		self.assertIn({'matricula':'9011122','nome':'Matheus'},gera_relacao_professores())
 		
 	def test_07_alterar_professor_nok_nao_existente(self):
@@ -306,7 +306,7 @@ class TestProfessor(unittest.TestCase):
 		self.assertEqual(retorno_esperado, 0)
 		
 	def test_09_excluir_professor_ok_excluido_com_sucesso(self):
-		print("Caso de Teste 09 - Condição de Retorno 0 ao excluir com sucesso")
+		print("Caso de Teste 09 - Verifica se excluiu efetivamente")
 		self.assertNotIn({'matricula':'9012233','nome':'Ana'},gera_relacao_professores())
 		
 	def test_10_excluir_professor_nok_nao_existente(self):
@@ -354,7 +354,7 @@ class TestTurma(unittest.TestCase):
 		retorno_esperado = insere_turma('3WA')
 		self.assertEqual(retorno_esperado, 1 )
 		
-	def test_04_inserir_turma_nok_ja_existente(self):
+	def test_04_inserir_turma_nok_campo_em_branco(self):
 		print("Caso de Teste 04 - Impede a inserção caso seja informado algum campo em branco")
 		retorno_esperado = insere_turma('')
 		self.assertEqual(retorno_esperado, 2 )
@@ -367,7 +367,7 @@ class TestTurma(unittest.TestCase):
 		self.assertEqual(retorno_esperado, 0)
 		
 	def test_06_alterar_turma_ok_alterado_com_sucesso(self):
-		print("Caso de Teste 06 - Condição de Retorno 0 ao alterar com sucesso")
+		print("Caso de Teste 06 - Verifica se alterou efetivamente")
 		self.assertIn({'codigo':'3WD'},gera_relacao_turmas())
 		
 	def test_07_alterar_turma_nok_nao_existente(self):
@@ -381,7 +381,7 @@ class TestTurma(unittest.TestCase):
 		self.assertEqual(retorno_esperado, 0)
 		
 	def test_09_excluir_turma_ok_excluido_com_sucesso(self):
-		print("Caso de Teste 09 - Condição de Retorno 0 ao excluir com sucesso")
+		print("Caso de Teste 09 - Verifica se excluiu efetivamenteo")
 		self.assertNotIn({'codigo':'3WA'},gera_relacao_turmas())
 		
 	def test_10_excluir_turma_nok_nao_existente(self):
